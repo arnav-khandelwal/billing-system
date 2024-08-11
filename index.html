@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Sale</h1>
+            <div class="toggle-container">
+                <input type="checkbox" id="toggle" class="toggle-input">
+                <label for="toggle" class="toggle-label">
+                    <span class="toggle-option">Credit</span>
+                    <span class="toggle-option">Cash</span>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+        
+        <div class="invoice-details">
+            <div class="left">
+                <label for="customer">Customer:</label>
+                <input type="text" id="customer" placeholder="Type customer name..." oninput="showCustomerSuggestions(this.value)">
+                <div id="customer-suggestions" class="customersuggestions"></div>
+                <label for="phone">Phone No.:</label>
+                <input type="text" id="phone">
+            </div>
+            <div class="right">
+                <label>Invoice Number: 676</label>
+                <label>Invoice Date: 05/08/2024</label>
+                <label>Time: 06:49 PM</label>
+            </div>
+        </div>
+        
+        <div class="details-row">
+            <label for="salesman">Salesman:</label>
+            <div class = "inp">
+            <input type="text" id="salesman" placeholder="Type salesman name..." oninput="showSalesmanSuggestions(this.value)">
+            <div id="salesman-suggestions" class="salesmansuggestions"></div>
+            </div>
+            <label for="trail-date">Trail Date:</label>
+            <input type="date" id="trail-date">
+            <label for="state-supply">State of Supply:</label>
+            <select id="state-supply">
+                <option>Select</option>
+            </select>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>ITEM</th>
+                    <th>DESCRIPTION</th>
+                    <th>QTY</th>
+                    <th>UNIT</th>
+                    <th>PRICE/UNIT</th>
+                    <th>DISCOUNT</th>
+                    <th>TAX</th>
+                    <th>AMOUNT</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>NONE</td>
+                    <td>NONE</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>NONE</td>
+                    <td>NONE</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button class="add-row">ADD ROW</button>
+
+        <div class="footer">
+            <label for="discount">Discount:</label>
+            <input type="text" id="discount">
+            <label for="total">Total:</label>
+            <input type="text" id="total">
+            <label>
+                <input type="checkbox" checked>
+                Round Off
+            </label>
+            <input type="text" value="0">
+            <button class="print-button">Print <span class="dropdown-arrow" style="border-left: 1.5px solid #007bff;">▼</span></button>
+            <button class="save">Save</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
