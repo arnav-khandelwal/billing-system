@@ -11,7 +11,7 @@ const salesmen = [
     'Michael Johnson',
     'Emily Davis'
 ];
-
+// krish
 function showCustomerSuggestions(value) {
     const suggestionsBox = document.getElementById('customer-suggestions');
     suggestionsBox.innerHTML = ''; // Clear previous suggestions
