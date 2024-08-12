@@ -101,3 +101,4 @@ updateInvoiceTime();
 
 // Example: Update time every minute
 setInterval(updateInvoiceTime, 60000);
+
