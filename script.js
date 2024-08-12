@@ -82,11 +82,6 @@ document.getElementById('customer-phone').addEventListener('input', function() {
     findCustomerByPhone(this.value);
 });
 
-// Function to update the invoice number
-function updateInvoiceNumber(newNumber) {
-    document.getElementById('invoice-number').textContent = 'Invoice Number: ' + newNumber;
-}
-
 // Function to update the invoice date
 function updateInvoiceDate(newDate) {
     document.getElementById('invoice-date').textContent = 'Invoice Date: ' + newDate;
