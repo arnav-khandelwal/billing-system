@@ -19,28 +19,30 @@
                 </label>
             </div>
         </div>
-        change part 4
+
         <div class="invoice-details">
             <div class="left">
                 <label for="customer">Customer:</label>
                 <input type="text" id="customer" placeholder="Type customer name..." oninput="showCustomerSuggestions(this.value)">
                 <div id="customer-suggestions" class="customersuggestions"></div>
-                <label for="phone">Phone No.:</label>
-                <input type="text" id="phone">
+                <label for="customer-phone">Phone No.:</label> <!-- Updated ID here -->
+                <input type="text" id="customer-phone"> <!-- Updated ID here -->
             </div>
             <div class="right">
-                <label>Invoice Number: 676</label>
-                <label>Invoice Date: 05/08/2024</label>
-                <label>Time: 06:49 PM</label>
+                <label id="invoice-number">Invoice Number: 676</label>
+                <label id="invoice-date">Invoice Date: 05/08/2024</label>
+                <label id="invoice-time">Time: 06:49 PM</label>
             </div>
         </div>
         
         <div class="details-row">
             <label for="salesman">Salesman:</label>
-            <div class = "inp">
-            <input type="text" id="salesman" placeholder="Type salesman name..." oninput="showSalesmanSuggestions(this.value)">
-            <div id="salesman-suggestions" class="salesmansuggestions"></div>
+            <div class="inp">
+                <input type="text" id="salesman" placeholder="Type salesman name..." oninput="showSalesmanSuggestions(this.value)">
+                <div id="salesman-suggestions" class="salesmansuggestions"></div>
             </div>
+            <label for="salesman-phone">Phone No.:</label> 
+            <input type="text" id="salesman-phone"> 
             <label for="trail-date">Trail Date:</label>
             <input type="date" id="trail-date">
             <label for="state-supply">State of Supply:</label>
@@ -79,7 +81,6 @@
                     <td>2</td>
                     <td>NONE</td>
                     <td>NONE</td>
-                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>

@@ -149,6 +149,7 @@ table td {
     background-color: #fff;
     width: 200px; /* Match width of the input box */
     display: none;
+    z-index: 1000;
     
 }
 
@@ -211,13 +212,12 @@ table td {
     transition: all 0.3s ease;
 }
 
+/* Default state */
 .toggle-label .toggle-option:first-child {
     color: white; /* White color for "Credit" when unchecked */
 }
-.toggle-label .toggle-option:last-child {
-    color: white; /* White color for "Credit" when unchecked */
-}
-/* When checkbox is checked: move the slider and update text colors */
+
+/* Checked state */
 .toggle-input:checked + .toggle-label .toggle-slider {
     left: calc(50% + 2px);
 }
@@ -227,5 +227,6 @@ table td {
 }
 
 .toggle-input:checked + .toggle-label .toggle-option:last-child {
-    color: white; /* White color for "Cash" when selected */
+    color: white; /* White color for "Cash" when selected */
 }
+
