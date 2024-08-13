@@ -229,3 +229,25 @@ table td {
 .toggle-input:checked + .toggle-label .toggle-option:last-child {
     color: white; /* White color for "Cash" when selected */
 }
+
+.container-add #data input {
+    width: calc(100% / 9 - 2px); /* Each input width should be 1/9th of the total container width */
+    padding: 8px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.container-add #data input[type="text"],
+.container-add #data input[type="number"] {
+    border: 1px solid #ddd;
+}
+
+.container-add #data {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 100%; /* Match the table's width */
+    max-width: 100%;
+    box-sizing: border-box;
+}
