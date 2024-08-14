@@ -73,7 +73,7 @@ function selectSalesmanSuggestion(name) {
 
 document.getElementById('addRowBtn').addEventListener('click', addRow);
 function addRow() {
-    const tableBody = document.querySelector('table tbody');
+    const tableBody = document.getElementById('tb');
     const nextSerialNumber = tableBody.rows.length + 1;
     const item = document.querySelector('input[placeholder="Item"]').value || 'NONE';
     const description = document.querySelector('input[placeholder="Description"]').value || 'NONE';
