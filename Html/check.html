@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice Form</title>
+    <link rel="stylesheet" href="../Css//styles.css">
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -22,7 +23,9 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="customer">Customer</label>
-                            <input type="text" class="form-control" id="customer" placeholder="Customer">
+                            <input type="text" class="form-control" id="customer" placeholder="Customer" 
+                                   oninput="showCustomerSuggestions(this.value)">
+                            <div id="customer-suggestions" class="suggestions-box"></div>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="phoneNo">Phone No.</label>
@@ -30,7 +33,9 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="salesman">Salesman</label>
-                            <input type="text" class="form-control" id="salesman" placeholder="Salesman">
+                            <input type="text" class="form-control" id="salesman" placeholder="Salesman" 
+                                   oninput="showSalesmanSuggestions(this.value)">
+                            <div id="salesman-suggestions" class="suggestions-box"></div>
                         </div>
                     </div>
 
@@ -46,17 +51,6 @@
                         <div class="form-group col-md-4">
                             <label for="trailDate">Trail Date</label>
                             <input type="time" class="form-control" id="trailDate" value="18:49">
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="stateOfSupply">State of Supply</label>
-                            <select id="stateOfSupply" class="form-control">
-                                <option selected>Select</option>
-                                <option>Option 1</option>
-                                <option>Option 2</option>
-                            </select>
                         </div>
                     </div>
 
@@ -78,42 +72,29 @@
                             <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td><input type="text" class="form-control" placeholder="Item"></td>
-                                    <td><input type="text" class="form-control" placeholder="Description"></td>
-                                    <td><input type="number" class="form-control" placeholder="Qty"></td>
-                                    <td><select class="form-control"><option>None</option></select></td>
-                                    <td><input type="text" class="form-control" placeholder="Price/Unit"></td>
-                                    <td><input type="text" class="form-control" placeholder="Discount"></td>
-                                    <td><select class="form-control"><option>Select</option></select></td>
-                                    <td><input type="text" class="form-control" placeholder="Amount"></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td><input type="text" class="form-control" placeholder="Item"></td>
-                                    <td><input type="text" class="form-control" placeholder="Description"></td>
-                                    <td><input type="number" class="form-control" placeholder="Qty"></td>
-                                    <td><select class="form-control"><option>None</option></select></td>
-                                    <td><input type="text" class="form-control" placeholder="Price/Unit"></td>
-                                    <td><input type="text" class="form-control" placeholder="Discount"></td>
-                                    <td><select class="form-control"><option>Select</option></select></td>
-                                    <td><input type="text" class="form-control" placeholder="Amount"></td>
+                                    <td><input type="text" class="form-control" id="ITEM" placeholder="Item"></td>
+                                    <td><input type="text" class="form-control" id="DESCRIPTION" placeholder="Description"></td>
+                                    <td><input type="number" class="form-control" id="QTY" placeholder="Qty"></td>
+                                    <td><select class="form-control" id="UNIT"><option>None</option></select></td>
+                                    <td><input type="text" class="form-control" id="PRICE/UNIT" placeholder="Price/Unit"></td>
+                                    <td><input type="text" class="form-control" id="DISCOUNT" placeholder="Discount"></td>
+                                    <td><select class="form-control" id="TAX"><option>Select</option></select></td>
+                                    <td><input type="text" class="form-control" id="AMOUNT" placeholder="Amount"></td>
                                 </tr>
                             </tbody>
                         </table>
-                        <button type="button" class="btn btn-primary btn-sm">Add Row</button>
+                        <button type="button" class="btn btn-primary btn-sm" id="addRowBtn">Add Row</button>
                     </div>
 
                     <div class="form-row mt-3">
                         <div class="form-group col-md-4">
-                            <label for="discount">Discount</label>
-                            <input type="text" class="form-control" id="discount">
+                            <label for="Coupon">Coupon</label>
+                            <input type="text" class="form-control" id="Coupon">
                         </div>
                         <div class="form-group col-md-4">
                             <div class="form-check mt-4">
                                 <input class="form-check-input" type="checkbox" id="roundOff">
-                                <label class="form-check-label" for="roundOff">
-                                    Round Off
-                                </label>
+                                <label class="form-check-label" for="roundOff">Round Off</label>
                             </div>
                         </div>
                         <div class="form-group col-md-4">
@@ -136,7 +117,7 @@
     </div>
 
     <!-- Bootstrap JS and dependencies -->
-     <!--Rudra accessed this and this is arnav showing how it works-->
+    <script src="../Js/new_script.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
