@@ -69,36 +69,44 @@ function selectSalesmanSuggestion(name) {
     document.getElementById('salesman').value = name;
     document.getElementById('salesman-suggestions').style.display = 'none';
 }
+//add-row button added by Rudra
+document.getElementById('addRowBtn').addEventListener('click', addRow);
+function addRow() {
+ 
+    const tableBody = document.querySelector('table tbody');
 
-function findCustomerByPhone(phone) {
-    const customer = customers.find(customer => customer.phone === phone);
-    if (customer) {
-        document.getElementById('customer').value = customer.name;
-    } else {
-        document.getElementById('customer').value = '';
-    }
+    const nextSerialNumber = tableBody.rows.length + 1;
+    const item = document.getElementById('ITEM').value || 'NONE';
+    const description = document.getElementById('DESCRIPTION').value || 'NONE';
+    const qty = document.getElementById('QTY').value || '';
+    const unit = document.getElementById('UNIT').value || '';
+    const pricePerUnit = document.getElementById('PRICE/UNIT').value || '';
+    const discount = document.getElementById('DISCOUNT').value || '';
+    const tax = document.getElementById('TAX').value || '';
+    const amount = document.getElementById('AMOUNT').value || '';
+    const newRow = document.createElement('tr');
+    newRow.innerHTML = `
+        <td>${nextSerialNumber}</td>
+        <td>${item}</td>
+        <td>${description}</td>
+        <td>${qty}</td>
+        <td>${unit}</td>
+        <td>${pricePerUnit}</td>
+        <td>${discount}</td>
+        <td>${tax}</td>
+        <td>${amount}</td>
+    `;
+    tableBody.appendChild(newRow);
+    clearInputs();
 }
-document.getElementById('customer-phone').addEventListener('input', function() {
-    findCustomerByPhone(this.value);
-});
 
-// Function to update the invoice date
-function updateInvoiceDate(newDate) {
-    document.getElementById('invoice-date').textContent = 'Invoice Date: ' + newDate;
+function clearInputs() {
+    document.getElementById('ITEM').value = '';
+    document.getElementById('DESCRIPTION').value = '';
+    document.getElementById('QTY').value = '';
+    document.getElementById('UNIT').value = '';
+    document.getElementById('PRICE/UNIT').value = '';
+    document.getElementById('DISCOUNT').value = '';
+    document.getElementById('TAX').value = '';
+    document.getElementById('AMOUNT').value = '';
 }
-
-// Function to update the time
-function updateInvoiceTime() {
-    const now = new Date();
-    const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    document.getElementById('invoice-time').textContent = 'Time: ' + timeString;
-}
-
-// Example: Update values initially
-updateInvoiceNumber('123');
-updateInvoiceDate('08/12/2024');
-updateInvoiceTime();
-
-// Example: Update time every minute
-setInterval(updateInvoiceTime, 60000);
-
