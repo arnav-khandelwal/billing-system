@@ -110,3 +110,39 @@ function clearInputs() {
     document.querySelector('select[placeholder="Select"]').value = '';
     document.querySelector('input[placeholder="Amount"]').value = '';
 }
+
+
+// Function to set the trail date to the current date and time
+function setCurrentDateTime() {
+    const now = new Date();
+    
+    // Get current year, month, day, hours, and minutes
+    const year = now.getFullYear();
+    let month = now.getMonth() + 1; // Months are zero-indexed
+    let day = now.getDate();
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    
+    // Add leading zeros if necessary
+    if (month < 10) {
+        month = '0' + month;
+    }
+    if (day < 10) {
+        day = '0' + day;
+    }
+    if (hours < 10) {
+        hours = '0' + hours;
+    }
+    if (minutes < 10) {
+        minutes = '0' + minutes;
+    }
+
+    // Format the datetime as YYYY-MM-DDTHH:MM
+    const currentDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+
+    // Set the value of the trailDate input field to the current date and time
+    document.getElementById('invoiceDate').value = currentDateTime;
+}
+
+// Call the function to set the trail date when the page loads
+window.onload = setCurrentDateTime;
