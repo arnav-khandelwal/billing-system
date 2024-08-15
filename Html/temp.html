@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>temp</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 5px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 7px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <label for="FirstName">FirstName: </label>
+    <input id="FirstName" type="text"><br>
+    <label for="lastName">LastName: </label>
+    <input id="lastName" type="text"><br>
+    <button onclick="createPDF()">PRINT</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        function createPDF() {
+            // Get the input values
+            const firstName = document.getElementById('FirstName').value;
+            const lastName = document.getElementById('lastName').value;
+
+            // Initialize jsPDF
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Add text to the PDF
+            doc.text(`First Name: ${firstName}`, 10, 10);
+            doc.text(`Last Name: ${lastName}`, 10, 20);
+
+            // Save the PDF
+            doc.save('output.pdf');
+        }
+    </script>
+</body>
+</html>

@@ -11,6 +11,46 @@ const salesmen = [
     'Michael Johnson',
     'Emily Davis'
 ];
+
+const products = {
+    "101": {
+        description: "Product A Description",
+        pricePerUnit: 50,
+        discount: 5,
+        tax: 12
+    },
+    "102": {
+        description: "Product B Description",
+        pricePerUnit: 75,
+        discount: 10,
+        tax: 18
+    },
+    "103": {
+        description: "Product C Description",
+        pricePerUnit: 30,
+        discount: 3,
+        tax: 5
+    },
+    "104": {
+        description: "Product D Description",
+        pricePerUnit: 100,
+        discount: 15,
+        tax: 20
+    },
+    "105": {
+        description: "Product E Description",
+        pricePerUnit: 200,
+        discount: 25,
+        tax: 36
+    },
+    "106": {
+        description: "Product F Description",
+        pricePerUnit: 40,
+        discount: 8,
+        tax: 10
+    }
+};
+
 console.log("new_script.js loaded successfully.");
 
 function showCustomerSuggestions(value) {
@@ -71,48 +111,6 @@ function selectSalesmanSuggestion(name) {
     document.getElementById('salesman-suggestions').style.display = 'none';
 }
 
-document.getElementById('addRowBtn').addEventListener('click', addRow);
-function addRow() {
-    const tableBody = document.getElementById('tb');
-    const nextSerialNumber = tableBody.rows.length + 1;
-    const item = document.querySelector('input[placeholder="Item"]').value || 'NONE';
-    const description = document.querySelector('input[placeholder="Description"]').value || 'NONE';
-    const qty = document.querySelector('input[placeholder="Qty"]').value || '';
-    const unit = document.querySelector('select[placeholder="None"]').value || '';
-    const pricePerUnit = document.querySelector('input[placeholder="Price/Unit"]').value || '';
-    const discount = document.querySelector('input[placeholder="Discount"]').value || '';
-    const tax = document.querySelector('select[placeholder="Select"]').value || '';
-    const amount = document.querySelector('input[placeholder="Amount"]').value || '';
-
-    const newRow = document.createElement('tr');
-    newRow.innerHTML = `
-        <td>${nextSerialNumber}</td>
-        <td>${item}</td>
-        <td>${description}</td>
-        <td>${qty}</td>
-        <td>${unit}</td>
-        <td>${pricePerUnit}</td>
-        <td>${discount}</td>
-        <td>${tax}</td>
-        <td>${amount}</td>
-    `;
-    tableBody.appendChild(newRow);
-    clearInputs();
-}
-
-function clearInputs() {
-    document.querySelector('input[placeholder="Item"]').value = '';
-    document.querySelector('input[placeholder="Description"]').value = '';
-    document.querySelector('input[placeholder="Qty"]').value = '';
-    document.querySelector('select[placeholder="None"]').value = '';
-    document.querySelector('input[placeholder="Price/Unit"]').value = '';
-    document.querySelector('input[placeholder="Discount"]').value = '';
-    document.querySelector('select[placeholder="Select"]').value = '';
-    document.querySelector('input[placeholder="Amount"]').value = '';
-}
-
-
-// Function to set the trail date to the current date and time
 function setCurrentDateTime() {
     const now = new Date();
     
@@ -140,9 +138,107 @@ function setCurrentDateTime() {
     // Format the datetime as YYYY-MM-DDTHH:MM
     const currentDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
 
-    // Set the value of the trailDate input field to the current date and time
+    // Set the value of the invoiceDate input field to the current date and time
     document.getElementById('invoiceDate').value = currentDateTime;
 }
 
-// Call the function to set the trail date when the page loads
+// Call the function to set the invoice date when the page loads
 window.onload = setCurrentDateTime;
+
+document.getElementById('addRowBtn').addEventListener('click', addRow);
+
+function addRow() {
+    const tableBody = document.getElementById('tb').getElementsByTagName('tbody')[0];
+    const nextSerialNumber = tableBody.rows.length + 1;
+
+    const newRow = document.createElement('tr');
+    newRow.innerHTML = `
+        <td>${nextSerialNumber}</td>
+        <td><input type="text" class="form-control" placeholder="ID"></td>
+        <td><input type="text" class="form-control" placeholder="Description" disabled></td>
+        <td><input type="number" class="form-control" placeholder="Qty"></td>
+        <td><input type="text" class="form-control" placeholder="Price" disabled></td>
+        <td><input type="text" class="form-control" placeholder="Discount" disabled></td>
+        <td><input type="text" class="form-control" placeholder="Tax" disabled></td>
+        <td><input type="text" class="form-control" placeholder="Amount" disabled></td>
+    `;
+
+    tableBody.appendChild(newRow);
+
+    // Attach event listener to the ID field of the new row
+    const idInput = newRow.querySelector('input[placeholder="ID"]');
+    idInput.addEventListener('input', function() {
+        const idValue = idInput.value;
+        if (products[idValue]) {
+            const product = products[idValue];
+            newRow.querySelector('input[placeholder="Description"]').value = product.description;
+            newRow.querySelector('input[placeholder="Price"]').value = product.pricePerUnit;
+            newRow.querySelector('input[placeholder="Discount"]').value = product.discount;
+            newRow.querySelector('input[placeholder="Tax"]').value = product.tax;
+
+            // Calculate amount
+            const qtyInput = newRow.querySelector('input[placeholder="Qty"]');
+            qtyInput.addEventListener('input', function () {
+                const qty = parseInt(qtyInput.value) || 0;
+                const pricePerUnit = parseFloat(product.pricePerUnit) || 0;
+                const discount = parseFloat(product.discount) || 0;
+                const tax = parseFloat(product.tax) || 0;
+
+                // Calculate the amount after discount and tax
+                const discountAmount = (pricePerUnit * qty) * (discount / 100);
+                const taxableAmount = (pricePerUnit * qty) - discountAmount;
+                const taxAmount = taxableAmount * (tax / 100);
+                const totalAmount = taxableAmount + taxAmount;
+
+                newRow.querySelector('input[placeholder="Amount"]').value = totalAmount.toFixed(2);
+            });
+        } else {
+            // Clear fields if product not found
+            newRow.querySelector('input[placeholder="Description"]').value = '';
+            newRow.querySelector('input[placeholder="Price"]').value = '';
+            newRow.querySelector('input[placeholder="Discount"]').value = '';
+            newRow.querySelector('input[placeholder="Tax"]').value = '';
+            newRow.querySelector('input[placeholder="Amount"]').value = '';
+        }
+    });
+}
+
+// Initial row's ID field event listener (if needed for the first row)
+const initialIdInput = document.querySelector('input[placeholder="ID"]');
+if (initialIdInput) {
+    initialIdInput.addEventListener('input', function() {
+        const idValue = this.value;
+        const row = this.closest('tr');
+        if (products[idValue]) {
+            const product = products[idValue];
+            row.querySelector('input[placeholder="Description"]').value = product.description;
+            row.querySelector('input[placeholder="Price"]').value = product.pricePerUnit;
+            row.querySelector('input[placeholder="Discount"]').value = product.discount;
+            row.querySelector('input[placeholder="Tax"]').value = product.tax;
+
+            // Calculate amount
+            const qtyInput = row.querySelector('input[placeholder="Qty"]');
+            qtyInput.addEventListener('input', function () {
+                const qty = parseInt(qtyInput.value) || 0;
+                const pricePerUnit = parseFloat(product.pricePerUnit) || 0;
+                const discount = parseFloat(product.discount) || 0;
+                const tax = parseFloat(product.tax) || 0;
+
+                // Calculate the amount after discount and tax
+                const discountAmount = (pricePerUnit * qty) * (discount / 100);
+                const taxableAmount = (pricePerUnit * qty) - discountAmount;
+                const taxAmount = taxableAmount * (tax / 100);
+                const totalAmount = taxableAmount + taxAmount;
+
+                row.querySelector('input[placeholder="Amount"]').value = totalAmount.toFixed(2);
+            });
+        } else {
+            // Clear fields if product not found
+            row.querySelector('input[placeholder="Description"]').value = '';
+            row.querySelector('input[placeholder="Price"]').value = '';
+            row.querySelector('input[placeholder="Discount"]').value = '';
+            row.querySelector('input[placeholder="Tax"]').value = '';
+            row.querySelector('input[placeholder="Amount"]').value = '';
+        }
+    });
+}

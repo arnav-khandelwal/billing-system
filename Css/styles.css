@@ -13,6 +13,10 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+#TAX {
+    min-width: 100px; /* Set a minimum width */
+}
+
 .invoice-details,
 .details-row {
     display: flex;

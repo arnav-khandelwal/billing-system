@@ -59,11 +59,10 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Item</th>
+                                    <th>ID</th>
                                     <th>Description</th>
                                     <th>Qty</th>
-                                    <th>Unit</th>
-                                    <th>Price/Unit</th>
+                                    <th>PRICE</th>
                                     <th>Discount</th>
                                     <th>Tax</th>
                                     <th>Amount</th>
@@ -72,14 +71,13 @@
                             <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td><input type="text" class="form-control" id="ITEM" placeholder="Item"></td>
-                                    <td><input type="text" class="form-control" id="DESCRIPTION" placeholder="Description"></td>
-                                    <td><input type="number" class="form-control" id="QTY" placeholder="Qty"></td>
-                                    <td><select class="form-control" id="UNIT" placeholder="None"><option>None</option></select></td>
-                                    <td><input type="text" class="form-control" id="PRICE/UNIT" placeholder="Price/Unit"></td>
-                                    <td><input type="text" class="form-control" id="DISCOUNT" placeholder="Discount"></td>
-                                    <td><select class="form-control" id="TAX" placeholder="Select"><option>Select</option></select></td>
-                                    <td><input type="text" class="form-control" id="AMOUNT" placeholder="Amount"></td>
+                                    <td><input type="text" class="form-control" placeholder="ID"></td>
+                                    <td><input type="text" class="form-control" placeholder="Description" disabled></td>
+                                    <td><input type="number" class="form-control" placeholder="Qty"></td>
+                                    <td><input type="text" class="form-control" placeholder="Price" disabled></td>
+                                    <td><input type="text" class="form-control" placeholder="Discount" disabled></td>
+                                    <td><input type="text" class="form-control" placeholder="Tax" disabled></td>
+                                    <td><input type="text" class="form-control" placeholder="Amount" disabled></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -92,10 +90,6 @@
                             <input type="text" class="form-control" id="Coupon">
                         </div>
                         <div class="form-group col-md-4">
-                            <div class="form-check mt-4">
-                                <input class="form-check-input" type="checkbox" id="roundOff">
-                                <label class="form-check-label" for="roundOff">Round Off</label>
-                            </div>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="total">Total</label>
