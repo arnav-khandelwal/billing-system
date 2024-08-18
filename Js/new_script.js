@@ -243,11 +243,15 @@ if (initialIdInput) {
 
 document.querySelector('.btn-secondary').addEventListener('click', function () {
     const { jsPDF } = window.jspdf;
+    const invoiceBox = document.getElementById("invoice-box");
 
-    document.getElementById("invoice-box").style.display = "block";
+    // Temporarily move the invoice box off-screen
+    invoiceBox.style.position = 'absolute';
+    invoiceBox.style.left = '-9999px';
+    invoiceBox.style.display = 'block';
 
     // Capture the HTML content
-    html2canvas(document.querySelector('.card-body')).then(canvas => {
+    html2canvas(invoiceBox).then(canvas => {
         const imgData = canvas.toDataURL('image/png');
         
         // Create a PDF
@@ -259,6 +263,11 @@ document.querySelector('.btn-secondary').addEventListener('click', function () {
         // Add the image to the PDF
         pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
         pdf.save("invoice.pdf");
-        document.getElementById("invoice-box").style.display = "none";
+
+        // Hide the invoice box again
+        invoiceBox.style.display = 'none';
+        invoiceBox.style.position = ''; // Reset position to default
+        invoiceBox.style.left = '';     // Reset left to default
     });
 });
+
