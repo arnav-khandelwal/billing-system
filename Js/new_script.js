@@ -111,6 +111,14 @@ function selectSalesmanSuggestion(name) {
 }
 
 function setCurrentDateTime() {
+
+    const curr = getCurrentDateTime();
+
+    // Set the value of the invoiceDate input field to the current date and time
+    document.getElementById('invoiceDate').value = curr;
+}
+
+function getCurrentDateTime(){
     const now = new Date();
     
     // Get current year, month, day, hours, and minutes
@@ -137,8 +145,7 @@ function setCurrentDateTime() {
     // Format the datetime as YYYY-MM-DDTHH:MM
     const currentDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
 
-    // Set the value of the invoiceDate input field to the current date and time
-    document.getElementById('invoiceDate').value = currentDateTime;
+    return currentDateTime;
 }
 
 // Call the function to set the invoice date when the page loads
@@ -249,8 +256,18 @@ document.querySelector('.btn-secondary').addEventListener('click', function () {
     invoiceBox.style.position = 'absolute';
     invoiceBox.style.left = '-9999px';
     invoiceBox.style.display = 'block';
-
-    // Capture the HTML content
+    
+    const d = getCurrentDateTime().replace("T", " ");
+    const sl = document.getElementById("salesman").value;
+    document.getElementById("billInfo").innerHTML = 
+    `Invoice #: 677<br>
+    Date: ${d}<br>
+    SalesMan: ${sl}<br>
+    `;
+    
+    const tb = document.getElementById("tb").innerHTML;
+    document.getElementById("items").innerHTML = `${tb}`;
+    // Capture the HTML content 
     html2canvas(invoiceBox).then(canvas => {
         const imgData = canvas.toDataURL('image/png');
         
