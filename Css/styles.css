@@ -123,12 +123,13 @@ table td {
     border: 1px solid #c0c0c0;
     max-height: 150px;
     overflow-y: auto;
-    position: absolute; /* Positioning relative to the parent */
+    position: absolute;
     background-color: #fff;
-    width: 200px; /* Match the width of the input field */
-    display: none; /* Hidden by default */
-    top: 100%; /* Position it directly below the input field */
-    left: 0;
+    width: 200px; /* Match width of the input box */
+    display: none;
+    z-index: 1000;
+    margin-top: 5px;
+    margin-left: 2px;
 }
 .inp{
     position: relative;
@@ -154,7 +155,8 @@ table td {
     width: 200px; /* Match width of the input box */
     display: none;
     z-index: 1000;
-    
+    margin-top: 5px;
+    margin-left: 2px;
 }
 
 .customersuggestions div {
