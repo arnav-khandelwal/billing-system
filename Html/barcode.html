@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barcode Generator</title>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+    <style>
+        /* Style the container to center the barcode and add padding */
+        .barcode-container {
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px; /* Added padding to make margin more visible */
+            border: 1px solid #ddd; /* Optional: border to visualize padding */
+            display: inline-block; /* Ensures the container is only as wide as necessary */
+            background-color: #f9f9f9; /* Optional: background color to highlight container */
+        }
+        
+        /* Hidden link */
+        #barcodeLink {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Barcode Generator</h1>
+    <form id="barcodeForm">
+        <input type="text" id="barcodeData" placeholder="Enter ID" required>
+        <button type="submit">Generate Barcode</button>
+    </form>
+    <div class="barcode-container">
+        <svg id="barcode"></svg>
+        <!-- Hidden element to hold the shortened URL -->
+        <a id="barcodeLink" href="" target="_blank"></a>
+    </div>
+
+    <script>
+        // Event listener for form submission to generate barcode
+        document.getElementById('barcodeForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Shortened URL to encode in the barcode
+            const shortUrl = "https://www.youtube.com/watch?v=Vsx9a7-IXX4"; // Replace with your shortened URL
+
+            // Generate barcode using JsBarcode with improved readability
+            JsBarcode("#barcode", shortUrl, {
+                format: "CODE128",
+                lineColor: "black",
+                width: 1,        // Adjusted width for better readability
+                height: 80,      // Increased height for better scanning
+                displayValue: false, // Hide the default value below the barcode
+                margin: 10       // Added margin around the barcode
+            });
+
+            // Set the link href attribute but keep it hidden
+            document.getElementById('barcodeLink').href = shortUrl;
+        });
+
+        // Optional: Handle barcode scanning to redirect
+        document.getElementById('barcode').addEventListener('click', function() {
+            // Trigger the hidden link's click event
+            document.getElementById('barcodeLink').click();
+        });
+    </script>
+</body>
+</html>

@@ -52,6 +52,7 @@ const products = {
 };
 
 console.log("new_script.js loaded successfully.");
+
 function showCustomerSuggestions(value) {
     const suggestionsBox = document.getElementById('customer-suggestions');
     suggestionsBox.innerHTML = ''; // Clear previous suggestions
@@ -111,44 +112,26 @@ function selectSalesmanSuggestion(name) {
 }
 
 function setCurrentDateTime() {
-
     const curr = getCurrentDateTime();
-
-    // Set the value of the invoiceDate input field to the current date and time
     document.getElementById('invoiceDate').value = curr;
 }
 
 function getCurrentDateTime(){
     const now = new Date();
-    
-    // Get current year, month, day, hours, and minutes
     const year = now.getFullYear();
     let month = now.getMonth() + 1; // Months are zero-indexed
     let day = now.getDate();
     let hours = now.getHours();
     let minutes = now.getMinutes();
     
-    // Add leading zeros if necessary
-    if (month < 10) {
-        month = '0' + month;
-    }
-    if (day < 10) {
-        day = '0' + day;
-    }
-    if (hours < 10) {
-        hours = '0' + hours;
-    }
-    if (minutes < 10) {
-        minutes = '0' + minutes;
-    }
+    if (month < 10) month = '0' + month;
+    if (day < 10) day = '0' + day;
+    if (hours < 10) hours = '0' + hours;
+    if (minutes < 10) minutes = '0' + minutes;
 
-    // Format the datetime as YYYY-MM-DDTHH:MM
-    const currentDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
-
-    return currentDateTime;
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
 }
 
-// Call the function to set the invoice date when the page loads
 window.onload = setCurrentDateTime;
 
 document.getElementById('addRowBtn').addEventListener('click', addRow);
@@ -210,15 +193,12 @@ function updateAmount(row, product) {
     const discount = parseFloat(product.discount) || 0;
     const tax = parseFloat(product.tax) || 0;
 
-    // Calculate the amount after discount and tax
     const discountAmount = (pricePerUnit * qty) * (discount / 100);
     const taxableAmount = (pricePerUnit * qty) - discountAmount;
     const taxAmount = taxableAmount * (tax / 100);
     const totalAmount = taxableAmount + taxAmount;
 
     row.querySelector('input[placeholder="Amount"]').value = totalAmount.toFixed(2);
-
-    // Update the total bill value
     updateTotalBill();
 }
 
@@ -241,7 +221,6 @@ function updateTotalBill() {
     document.getElementById('total').value = total.toFixed(2);
 }
 
-// Initial row's ID field event listener (if needed for the first row)
 const initialIdInput = document.querySelector('input[placeholder="ID"]');
 if (initialIdInput) {
     const initialRow = initialIdInput.closest('tr');
@@ -252,7 +231,6 @@ document.querySelector('.btn-secondary').addEventListener('click', function () {
     const { jsPDF } = window.jspdf;
     const invoiceBox = document.getElementById("invoice-box");
 
-    // Temporarily move the invoice box off-screen
     invoiceBox.style.position = 'absolute';
     invoiceBox.style.left = '-9999px';
     invoiceBox.style.display = 'block';
@@ -267,24 +245,29 @@ document.querySelector('.btn-secondary').addEventListener('click', function () {
     
     const tb = document.getElementById("tb").innerHTML;
     document.getElementById("items").innerHTML = `${tb}`;
-    // Capture the HTML content 
     html2canvas(invoiceBox).then(canvas => {
         const imgData = canvas.toDataURL('image/png');
         
-        // Create a PDF
         const pdf = new jsPDF('p', 'pt', 'a4');
         const imgProps = pdf.getImageProperties(imgData);
         const pdfWidth = pdf.internal.pageSize.getWidth();
         const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
-        // Add the image to the PDF
         pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
         pdf.save("invoice.pdf");
 
-        // Hide the invoice box again
         invoiceBox.style.display = 'none';
-        invoiceBox.style.position = ''; // Reset position to default
-        invoiceBox.style.left = '';     // Reset left to default
+        invoiceBox.style.position = '';
+        invoiceBox.style.left = '';
     });
 });
 
+function generateBarcode(value) {
+    JsBarcode("#barcode", value, {
+        format: "CODE128",
+        lineColor: "#000",
+        width: 2,
+        height: 40,
+        displayValue: true
+    });
+}
