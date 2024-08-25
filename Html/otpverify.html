@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>verfication</title>
+</head>
+<body>
+  <form id="numberandEmailverify"onsubmit="return validateForm()">
+    <label for="phoneNo">Phone no.:  </label>
+    <input type="tel" id="phoneNo">
+    <label for="email">Email:  </label>
+    <input type="email" id="email">
+    <input type="submit" value="submit">
+  </form>
+
+  <script>
+   function validateForm() {
+      let isValid = true;
+
+      // Validate Phone Number
+      const phoneNo = document.getElementById('phoneNo').value;
+      const digitsOnly = phoneNo.replace(/\D/g, ''); // Remove non-digit characters
+      if (digitsOnly.length !== 10) {
+        alert('Phone number must be exactly 10 digits long.');
+        isValid = false;
+      }
+      // Validate Email
+      const email = document.getElementById('email').value;
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailPattern.test(email)) {
+        alert('Please enter a valid email address.');
+        isValid = false;
+      }
+
+      return isValid; // Prevent form submission if there are errors
+    }
+  </script>
+</body>
+</html>
